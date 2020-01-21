@@ -9,7 +9,7 @@ class SQLAlchemy(_SQLAlchemy):
     def auto_commit(self):
         try:
             yield
-            self.session.commite()
+            self.session.commit()
         except Exception as e:
             self.session.rollback()
             raise e
@@ -20,7 +20,7 @@ db = SQLAlchemy()
 
 class Base(db.Model):
     __abstract__ = True  # 变成抽象类，只声明不实现
-    create_time = Column('create_time', Integer)
+    create_time = Column(Integer)
     status = Column(SmallInteger, default=1)
 
     def __init__(self):

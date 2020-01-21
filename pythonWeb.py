@@ -1,7 +1,13 @@
 # 入口文件
-from app import create_app
+from app.app import create_app
 
 app = create_app()
+
+
+@app.route('/test', methods=['GET'])
+def test():
+    return 'you got me'
+
 
 if __name__ == '__main__':
     app.run(
