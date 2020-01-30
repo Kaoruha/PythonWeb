@@ -1,4 +1,4 @@
-# 定义枚举类型
+# 在这里定义枚举类型
 from enum import Enum
 
 

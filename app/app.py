@@ -1,15 +1,6 @@
 # 应用初始化
 from flask import Flask
 from config import secure, setting
-from models.base import db
-
-
-# 将所有插件引入并注册
-def reg_plugins(app):
-    # 数据库
-    db.init_app(app)
-    with app.app_context():
-        db.create_all()
 
 
 # 注册蓝图
@@ -27,5 +18,17 @@ def create_app():
 
     # 注册蓝图
     reg_blueprints(app)
+    reg_plugins(app)
 
     return app
+
+
+# 将所有插件引入并注册
+def reg_plugins(app):
+    # 数据库映射
+    from models.base import db
+    db.init_app(app)
+    with app.app_context():
+        # 引入模型包，会加载__init__下导入的所有模型
+        from app import models
+        db.create_all()

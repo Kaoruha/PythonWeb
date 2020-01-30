@@ -25,3 +25,16 @@ class Base(db.Model):
 
     def __init__(self):
         self.create_time = int(datetime.now().timestamp())
+
+    @property
+    def create_time(self):
+        if self.create_time:
+            return datetime.fromtimestamp(self.create_time)
+        else:
+            return None
+
+    def delete(self):
+        if self.status == 0:
+            return
+        else:
+            self.status = 0
